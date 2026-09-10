@@ -141,7 +141,7 @@ export default function Dashboard() {
                     <td className="py-2 pl-3"><LevelBadge level={r.risk_level} /></td>
                     <td className="py-2 pl-3 text-slate-300">{r.risk_score}</td>
                     <td className="py-2 pl-3"><StatusBadge status={r.status} /></td>
-                    <td className="py-2 pl-3 text-slate-400">{r.owner ?? "—"}</td>
+                    <td className="py-2 pl-3 text-slate-400">{r.owner ?? "-"}</td>
                   </tr>
                 ))}
                 {data.recent_risks.length === 0 && (

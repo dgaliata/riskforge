@@ -114,7 +114,7 @@ export default function RiskMatrix() {
                       <td className="px-4 py-3"><StatusBadge status={r.status} /></td>
                       <td className="px-4 py-3 text-slate-400">
                         <span className="rounded border border-slate-700 bg-slate-800/60 px-1.5 py-0.5 font-mono text-xs text-slate-300">
-                          {r.control?.control_id ?? "—"}
+                          {r.control?.control_id ?? "-"}
                         </span>
                       </td>
                       <td className="px-4 py-3">

@@ -150,5 +150,5 @@ you can begin entering risks.
 - Use **Amazon CloudWatch** for logs (`awslogs-group` already configured in task definitions).
 - Add **authentication** before exposing publicly: ALB OIDC (Cognito), WAF, or an API gateway.
 - Point `SEED_ON_STARTUP=false` after bootstrap to avoid rescoping.
-- The control catalog lives in `backend/app/nist_controls_data.py` — edit it to customize
+- The control catalog lives in `backend/app/nist_controls_data.py` - edit it to customize
   baselines, priorities, or statements without touching the schema or UI.

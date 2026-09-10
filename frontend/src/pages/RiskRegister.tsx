@@ -134,7 +134,7 @@ export default function RiskRegister() {
                     <p className="font-medium text-slate-200">{r.title}</p>
                     <p className="max-w-[260px] truncate text-xs text-slate-500">{r.description}</p>
                   </td>
-                  <td className="px-4 py-3 text-slate-400">{r.category ?? "—"}</td>
+                  <td className="px-4 py-3 text-slate-400">{r.category ?? "-"}</td>
                   <td className="px-4 py-3 text-slate-300">{r.likelihood} &times; {r.impact}</td>
                   <td className="px-4 py-3 font-semibold text-slate-100">{r.risk_score}</td>
                   <td className="px-4 py-3"><LevelBadge level={r.risk_level} /></td>
@@ -145,10 +145,10 @@ export default function RiskRegister() {
                         {r.control.control_id}
                       </span>
                     ) : (
-                      <span className="text-slate-600">—</span>
+                      <span className="text-slate-600">-</span>
                     )}
                   </td>
-                  <td className="px-4 py-3 text-slate-400">{r.owner ?? "—"}</td>
+                  <td className="px-4 py-3 text-slate-400">{r.owner ?? "-"}</td>
                   <td className="px-4 py-3">
                     <div className="flex gap-1">
                       <button

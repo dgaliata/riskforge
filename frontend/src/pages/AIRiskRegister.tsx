@@ -93,9 +93,9 @@ export default function AIRiskRegister() {
 
   const mappingFor = (risk: AIRisk) => {
     if (risk.taxonomy === "owasp") {
-      return risk.owasp_category ? `${risk.owasp_category.code} · ${risk.owasp_category.name}` : "—";
+      return risk.owasp_category ? `${risk.owasp_category.code} · ${risk.owasp_category.name}` : "-";
     }
-    return subLabelFor(risk) ?? "—";
+    return subLabelFor(risk) ?? "-";
   };
 
   return (
@@ -130,7 +130,7 @@ export default function AIRiskRegister() {
           <select className="input" value={owaspFilter} onChange={(e) => setOwaspFilter(e.target.value)}>
             <option value="">All LLM categories</option>
             {owaspCategories.map((c) => (
-              <option key={c.code} value={c.code}>{c.code} — {c.name}</option>
+              <option key={c.code} value={c.code}>{c.code} - {c.name}</option>
             ))}
           </select>
         ) : (
@@ -177,7 +177,7 @@ export default function AIRiskRegister() {
                 <tr key={r.id} className="border-b border-slate-800/60 last:border-0 hover:bg-slate-800/30">
                   <td className="px-4 py-3">
                     <p className="font-medium text-slate-200">{r.title}</p>
-                    <p className="text-xs text-slate-500">{r.ai_system_name ?? "—"}</p>
+                    <p className="text-xs text-slate-500">{r.ai_system_name ?? "-"}</p>
                   </td>
                   <td className="px-4 py-3">
                     {r.taxonomy === "owasp" ? (
@@ -192,7 +192,7 @@ export default function AIRiskRegister() {
                   </td>
                   <td className="px-4 py-3 font-semibold text-slate-100">{r.risk_score}</td>
                   <td className="px-4 py-3"><LevelBadge level={r.risk_level} /></td>
-                  <td className="px-4 py-3 text-slate-400">{r.risk_response ?? "—"}</td>
+                  <td className="px-4 py-3 text-slate-400">{r.risk_response ?? "-"}</td>
                   <td className="px-4 py-3"><StatusBadge status={r.status} /></td>
                   <td className="px-4 py-3">
                     <div className="flex gap-1">

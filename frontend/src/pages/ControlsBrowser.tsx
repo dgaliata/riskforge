@@ -70,7 +70,7 @@ export default function ControlsBrowser() {
       <div>
         <h2 className="text-xl font-semibold text-slate-100">NIST SP 800-53 Controls</h2>
         <p className="text-sm text-slate-500">
-          Rev 5 control catalog &mdash; 20 families. Browse controls and see which register risks map to each.
+          Rev 5 control catalog - 20 families. Browse controls and see which register risks map to each.
         </p>
       </div>
 
@@ -121,10 +121,10 @@ export default function ControlsBrowser() {
                 >
                   <td className="py-2.5 pr-3 font-mono text-xs font-semibold text-blue-400">{c.control_id}</td>
                   <td className="py-2.5 pr-3 font-medium text-slate-200">{c.control_name}</td>
-                  <td className="py-2.5 pr-3 text-xs text-slate-400">{c.baseline ?? "—"}</td>
+                  <td className="py-2.5 pr-3 text-xs text-slate-400">{c.baseline ?? "-"}</td>
                   <td className="py-2.5 pr-3">
                     <span className="rounded border border-slate-700 bg-slate-800 px-1.5 py-0.5 font-mono text-xs text-slate-300">
-                      {c.priority ?? "—"}
+                      {c.priority ?? "-"}
                     </span>
                   </td>
                   <td className="py-2.5 pr-3">
@@ -161,15 +161,15 @@ export default function ControlsBrowser() {
             </div>
             <div>
               <p className="text-xs uppercase text-slate-500">Baseline</p>
-              <p className="text-slate-300">{selected.baseline ?? "—"}</p>
+              <p className="text-slate-300">{selected.baseline ?? "-"}</p>
             </div>
             <div>
               <p className="text-xs uppercase text-slate-500">Priority</p>
-              <p className="text-slate-300">{selected.priority ?? "—"}</p>
+              <p className="text-slate-300">{selected.priority ?? "-"}</p>
             </div>
             <div>
               <p className="text-xs uppercase text-slate-500">Related Controls</p>
-              <p className="text-slate-300">{selected.related_controls ?? "—"}</p>
+              <p className="text-slate-300">{selected.related_controls ?? "-"}</p>
             </div>
           </div>
 

@@ -54,8 +54,8 @@ OWASP_LLM_CATEGORIES = [
     (
         "LLM08",
         "Hidden Context Exposure",
-        "Any hidden operational context — retrieved documents, agent memory, application "
-        "state, and tool responses — is attack surface for disclosure or manipulation, not "
+        "Any hidden operational context - retrieved documents, agent memory, application "
+        "state, and tool responses - is attack surface for disclosure or manipulation, not "
         "just the system prompt. Replaces the 2025 System Prompt Leakage category.",
     ),
     (

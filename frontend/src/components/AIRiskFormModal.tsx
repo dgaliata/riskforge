@@ -208,7 +208,7 @@ export default function AIRiskFormModal({
               <option value="">-- Select LLM category --</option>
               {owaspCategories.map((cat) => (
                 <option key={cat.id} value={cat.id}>
-                  {cat.code} &mdash; {cat.name}
+                  {cat.code} - {cat.name}
                 </option>
               ))}
             </select>
@@ -260,7 +260,7 @@ export default function AIRiskFormModal({
             <label className="label">Likelihood</label>
             <select className="input w-full" value={form.likelihood} onChange={(e) => setForm({ ...form, likelihood: Number(e.target.value) })}>
               {[1, 2, 3, 4, 5].map((n) => (
-                <option key={n} value={n}>{n} &mdash; {LIKELIHOOD_LABELS[n]}</option>
+                <option key={n} value={n}>{n} - {LIKELIHOOD_LABELS[n]}</option>
               ))}
             </select>
           </div>
@@ -268,7 +268,7 @@ export default function AIRiskFormModal({
             <label className="label">Impact</label>
             <select className="input w-full" value={form.impact} onChange={(e) => setForm({ ...form, impact: Number(e.target.value) })}>
               {[1, 2, 3, 4, 5].map((n) => (
-                <option key={n} value={n}>{n} &mdash; {IMPACT_LABELS[n]}</option>
+                <option key={n} value={n}>{n} - {IMPACT_LABELS[n]}</option>
               ))}
             </select>
           </div>

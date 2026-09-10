@@ -19,7 +19,7 @@ function LikelihoodImpactRow({
       <select className="input w-full" value={value} onChange={(e) => onChange(Number(e.target.value))}>
         {[1, 2, 3, 4, 5].map((n) => (
           <option key={n} value={n}>
-            {n} &mdash; {labels[n]}
+            {n} - {labels[n]}
           </option>
         ))}
       </select>
@@ -172,7 +172,7 @@ export default function RiskFormModal({
               <option value="">-- None --</option>
               {controls.map((c) => (
                 <option key={c.id} value={c.id}>
-                  {c.control_id} &mdash; {c.control_name}
+                  {c.control_id} - {c.control_name}
                 </option>
               ))}
             </select>
