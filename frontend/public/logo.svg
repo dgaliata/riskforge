@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 32 32" role="img" aria-label="RiskForge logo">
+  <defs>
+    <linearGradient id="rf-tile" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stopColor="#0f172a" />
+      <stop offset="1" stopColor="#1e1b4b" />
+    </linearGradient>
+  </defs>
+  <rect width="32" height="32" rx="8" fill="url(#rf-tile)" />
+  <rect x="5" y="12.5" width="5.1" height="7" rx="1.8" fill="#34d399" />
+  <rect x="10.6" y="12.5" width="5.1" height="7" rx="1.8" fill="#fbbf24" />
+  <rect x="16.2" y="12.5" width="5.1" height="7" rx="1.8" fill="#fb923c" />
+  <rect x="21.8" y="12.5" width="5.1" height="7" rx="1.8" fill="#f43f5e" />
+</svg>

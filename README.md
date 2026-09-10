@@ -1,4 +1,10 @@
+<div align="center">
+
+<img src="frontend/public/logo.svg" alt="RiskForge logo" width="96" height="96" />
+
 # RiskForge
+
+</div>
 
 A modern, web-based risk register for **NIST SP 800-53 (Rev 5)** and **NIST AI RMF 1.0**
 built to be deployed on AWS. It provides a 5×5 risk matrix, dashboards, control mapping,
@@ -6,26 +12,26 @@ an AI-risk section, and CSV reporting.
 
 ## Features
 
-- **Risk Register** — full CRUD with filters, search, owners, mitigation tracking
-- **5×5 Risk Matrix** — interactive heat map (likelihood × impact) with per-cell drills-down
-- **NIST 800-53 Controls Browser** — all 20 control families, baselines, priority, and linked risks
-- **AI Risk Register** — two selectable taxonomies per risk:
-  - **NIST AI RMF 1.0** — GOVERN / MAP / MEASURE / MANAGE, all 72 subcategories,
+- **Risk Register** - full CRUD with filters, search, owners, mitigation tracking
+- **5×5 Risk Matrix** - interactive heat map (likelihood × impact) with per-cell drills-down
+- **NIST 800-53 Controls Browser** - all 20 control families, baselines, priority, and linked risks
+- **AI Risk Register** - two selectable taxonomies per risk:
+  - **NIST AI RMF 1.0** - GOVERN / MAP / MEASURE / MANAGE, all 72 subcategories,
     7 trustworthy characteristics, 12 GenAI risk categories (NIST AI 600-1), risk responses
-  - **OWASP GenAI LLM Top 10 (2026)** — LLM01–LLM10, filterable, with coverage reporting
-- **Dashboard** — posture summary, level/status charts, heat map, recently updated risks
-- **Reports** — AI RMF + OWASP LLM coverage, control family coverage, CSV exports for both registers
-- **Containerized** — Docker Compose for local testing, ECS Fargate + RDS for AWS
+  - **OWASP GenAI LLM Top 10 (2026)** - LLM01–LLM10, filterable, with coverage reporting
+- **Dashboard** - posture summary, level/status charts, heat map, recently updated risks
+- **Reports** - AI RMF + OWASP LLM coverage, control family coverage, CSV exports for both registers
+- **Containerized** - Docker Compose for local testing, ECS Fargate + RDS for AWS
 
 ### Why two AI taxonomies?
 
 The two AI frameworks serve different jobs by design:
 
-- **AI RMF subcategories are not controls** — they are activities/outcomes ("legal and
+- **AI RMF subcategories are not controls** - they are activities/outcomes ("legal and
   regulatory requirements understood and documented"). Mapping an individual risk to a
   subcategory like `GOV-1.1` tells you little about the actual failure mode; it is a
   *governance umbrella*, not a per-risk technical mapping.
-- **OWASP GenAI LLM Top 10 (2026)** is the load-bearing layer — it supplies the concrete,
+- **OWASP GenAI LLM Top 10 (2026)** is the load-bearing layer - it supplies the concrete,
   testable technical taxonomy (prompt injection, sensitive-information disclosure, etc.).
 
 Think of it as: **AI RMF = "are we governing AI risk?"** · **OWASP = "what technical thing
@@ -54,7 +60,7 @@ docker compose up --build
 The backend seeds **191 NIST 800-53 controls** across 20 families, the full **NIST AI
 RMF 1.0 framework (4 functions / 19 categories / 72 subcategories)**, and the
 **OWASP GenAI LLM Top 10 2026 (LLM01–LLM10)** on first startup.
-The register itself starts empty — add risks from the UI.
+The register itself starts empty - add risks from the UI.
 
 ### Local development (no Docker)
 
@@ -91,7 +97,7 @@ npm run dev          # http://localhost:5173
 
 ## Risk scoring (5×5)
 
-`Score = likelihood × impact` — level thresholds:
+`Score = likelihood × impact` - level thresholds:
 
 | Level    | Score   |
 |----------|---------|
