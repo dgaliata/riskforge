@@ -1,0 +1,73 @@
+version: 2.1
+
+jobs:
+  gitleaks:
+    docker:
+      - image: zricethezav/gitleaks:v8.21.2
+    steps:
+      - checkout
+      - run:
+          name: Scan repo history for committed secrets
+          command: gitleaks detect --source . --redact --verbose --exit-code 1
+
+  trivy-fs:
+    docker:
+      - image: aquasec/trivy:0.56.2
+    steps:
+      - checkout
+      - run:
+          name: Scan dependencies and IaC/Dockerfiles for known vulnerabilities
+          command: |
+            trivy fs \
+              --scanners vuln,misconfig \
+              --severity HIGH,CRITICAL \
+              --ignore-unfixed \
+              --exit-code 1 \
+              .
+
+  trivy-images:
+    machine:
+      image: ubuntu-2204:current
+    steps:
+      - checkout
+      - run:
+          name: Build backend image
+          command: docker build -t riskforge-backend:ci ./backend
+      - run:
+          name: Build frontend image
+          command: docker build -t riskforge-frontend:ci ./frontend
+      - run:
+          name: Scan backend image
+          command: |
+            docker run --rm -v /var/run/docker.sock:/var/run/docker.sock \
+              aquasec/trivy:0.56.2 image \
+              --severity HIGH,CRITICAL --ignore-unfixed --exit-code 1 \
+              riskforge-backend:ci
+      - run:
+          name: Scan frontend image
+          command: |
+            docker run --rm -v /var/run/docker.sock:/var/run/docker.sock \
+              aquasec/trivy:0.56.2 image \
+              --severity HIGH,CRITICAL --ignore-unfixed --exit-code 1 \
+              riskforge-frontend:ci
+
+  sonarcloud:
+    docker:
+      - image: sonarsource/sonar-scanner-cli:11.2
+    steps:
+      - checkout
+      - run:
+          name: Run SonarCloud analysis
+          command: |
+            sonar-scanner \
+              -Dsonar.organization="$SONAR_ORGANIZATION" \
+              -Dsonar.projectKey="$SONAR_PROJECT_KEY"
+
+workflows:
+  security-and-quality:
+    jobs:
+      - gitleaks
+      - trivy-fs
+      - trivy-images
+      - sonarcloud:
+          context: SonarCloud
