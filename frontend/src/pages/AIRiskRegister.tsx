@@ -2,9 +2,7 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import { api } from "@/api/client";
 import type { AIMFunction, AIRisk, AIRiskPayload, AITaxonomyMeta, OwaspLLMCategory } from "@/api/types";
 import AIRiskFormModal from "@/components/AIRiskFormModal";
-import { Spinner } from "@/components/ui";
-import { AIFunctionBadge, LevelBadge, StatusBadge } from "@/components/ui";
-import { Badge } from "@/components/ui";
+import { AIFunctionBadge, Badge, LevelBadge, Spinner, StatusBadge } from "@/components/ui";
 
 const STATUS_OPTIONS = ["", "Identified", "Assessed", "Treated", "Monitored"];
 const LEVEL_OPTIONS = ["", "Low", "Medium", "High", "Critical"];

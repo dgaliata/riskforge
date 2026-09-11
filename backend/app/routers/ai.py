@@ -9,6 +9,8 @@ from ..database import get_db
 
 router = APIRouter(prefix="/api/ai", tags=["ai-rmf"])
 
+AI_RISK_NOT_FOUND = "AI risk not found"
+
 
 @router.get("/functions")
 def list_functions(db: Session = Depends(get_db)):
@@ -112,7 +114,7 @@ def get_ai_risk(risk_id, db: Session = Depends(get_db)):
         .first()
     )
     if not risk:
-        raise HTTPException(status_code=404, detail="AI risk not found")
+        raise HTTPException(status_code=404, detail=AI_RISK_NOT_FOUND)
     return risk
 
 
@@ -120,7 +122,7 @@ def get_ai_risk(risk_id, db: Session = Depends(get_db)):
 def update_ai_risk(risk_id, payload: schemas.AIRiskUpdate, db: Session = Depends(get_db)):
     risk = db.query(models.AIRisk).filter(models.AIRisk.id == risk_id).first()
     if not risk:
-        raise HTTPException(status_code=404, detail="AI risk not found")
+        raise HTTPException(status_code=404, detail=AI_RISK_NOT_FOUND)
     _validate_ai_mapping(
         db, payload.taxonomy or risk.taxonomy, payload.subcategory_id, payload.owasp_llm_id
     )
@@ -131,7 +133,7 @@ def update_ai_risk(risk_id, payload: schemas.AIRiskUpdate, db: Session = Depends
 def delete_ai_risk(risk_id, db: Session = Depends(get_db)):
     risk = db.query(models.AIRisk).filter(models.AIRisk.id == risk_id).first()
     if not risk:
-        raise HTTPException(status_code=404, detail="AI risk not found")
+        raise HTTPException(status_code=404, detail=AI_RISK_NOT_FOUND)
     db.delete(risk)
     db.commit()
 

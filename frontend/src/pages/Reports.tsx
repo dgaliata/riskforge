@@ -65,11 +65,6 @@ export default function Reports() {
     });
   }, [owaspCategories, aiRisks]);
 
-  const totalCategoriesUsed = useMemo(() => {
-    const subIds = new Set(risks.filter((r) => r.control_id).map((r) => r.control?.family_code).filter(Boolean));
-    return subIds.size;
-  }, [risks]);
-
   if (loading || !summary) return <Spinner />;
 
   const download = (riskType: "standard" | "ai") => {

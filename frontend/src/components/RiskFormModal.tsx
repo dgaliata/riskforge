@@ -13,10 +13,11 @@ function LikelihoodImpactRow({
   onChange: (n: number) => void;
 }) {
   const labels = kind === "likelihood" ? LIKELIHOOD_LABELS : IMPACT_LABELS;
+  const id = `risk-${kind}`;
   return (
     <div>
-      <label className="label">{kind === "likelihood" ? "Likelihood" : "Impact"}</label>
-      <select className="input w-full" value={value} onChange={(e) => onChange(Number(e.target.value))}>
+      <label className="label" htmlFor={id}>{kind === "likelihood" ? "Likelihood" : "Impact"}</label>
+      <select id={id} className="input w-full" value={value} onChange={(e) => onChange(Number(e.target.value))}>
         {[1, 2, 3, 4, 5].map((n) => (
           <option key={n} value={n}>
             {n} - {labels[n]}
@@ -106,8 +107,9 @@ export default function RiskFormModal({
     <Modal open={open} onClose={onClose} title={risk ? "Edit Risk" : "New Risk"} wide>
       <form onSubmit={submit} className="space-y-4">
         <div>
-          <label className="label">Title</label>
+          <label className="label" htmlFor="risk-title">Title</label>
           <input
+            id="risk-title"
             className="input w-full"
             value={form.title}
             onChange={(e) => setForm({ ...form, title: e.target.value })}
@@ -115,8 +117,9 @@ export default function RiskFormModal({
           />
         </div>
         <div>
-          <label className="label">Description</label>
+          <label className="label" htmlFor="risk-description">Description</label>
           <textarea
+            id="risk-description"
             className="input w-full"
             rows={3}
             value={form.description ?? ""}
@@ -125,8 +128,9 @@ export default function RiskFormModal({
         </div>
         <div className="grid grid-cols-2 gap-4">
           <div>
-            <label className="label">Status</label>
+            <label className="label" htmlFor="risk-status">Status</label>
             <select
+              id="risk-status"
               className="input w-full"
               value={form.status}
               onChange={(e) => setForm({ ...form, status: e.target.value as RiskPayload["status"] })}
@@ -138,8 +142,9 @@ export default function RiskFormModal({
             </select>
           </div>
           <div>
-            <label className="label">Category</label>
+            <label className="label" htmlFor="risk-category">Category</label>
             <input
+              id="risk-category"
               className="input w-full"
               value={form.category ?? ""}
               placeholder="e.g. External, Technical, Compliance"
@@ -159,12 +164,13 @@ export default function RiskFormModal({
         </div>
         <div className="grid grid-cols-2 gap-4">
           <div>
-            <label className="label">Owner</label>
-            <input className="input w-full" value={form.owner ?? ""} onChange={(e) => setForm({ ...form, owner: e.target.value })} />
+            <label className="label" htmlFor="risk-owner">Owner</label>
+            <input id="risk-owner" className="input w-full" value={form.owner ?? ""} onChange={(e) => setForm({ ...form, owner: e.target.value })} />
           </div>
           <div>
-            <label className="label">NIST 800-53 Control</label>
+            <label className="label" htmlFor="risk-control">NIST 800-53 Control</label>
             <select
+              id="risk-control"
               className="input w-full"
               value={form.control_id ?? ""}
               onChange={(e) => setForm({ ...form, control_id: e.target.value || null })}
@@ -180,8 +186,9 @@ export default function RiskFormModal({
         </div>
         <div className="grid grid-cols-2 gap-4">
           <div>
-            <label className="label">Identified Date</label>
+            <label className="label" htmlFor="risk-identified-date">Identified Date</label>
             <input
+              id="risk-identified-date"
               type="date"
               className="input w-full"
               value={form.identified_date ?? ""}
@@ -189,8 +196,9 @@ export default function RiskFormModal({
             />
           </div>
           <div>
-            <label className="label">Target Mitigation Date</label>
+            <label className="label" htmlFor="risk-target-mitigation-date">Target Mitigation Date</label>
             <input
+              id="risk-target-mitigation-date"
               type="date"
               className="input w-full"
               value={form.target_mitigation_date ?? ""}
@@ -199,8 +207,9 @@ export default function RiskFormModal({
           </div>
         </div>
         <div>
-          <label className="label">Mitigation Notes</label>
+          <label className="label" htmlFor="risk-mitigation-notes">Mitigation Notes</label>
           <textarea
+            id="risk-mitigation-notes"
             className="input w-full"
             rows={3}
             value={form.mitigation_notes ?? ""}

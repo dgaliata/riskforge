@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import type { AIMFunction, AIRisk, AIRiskPayload, AITaxonomy, AITaxonomyMeta, OwaspLLMCategory } from "@/api/types";
+import type { AIMFunction, AIRisk, AIRiskPayload, AITaxonomyMeta, OwaspLLMCategory } from "@/api/types";
 import { Modal } from "@/components/ui";
 import { IMPACT_LABELS, LIKELIHOOD_LABELS, levelFor, scoreFor } from "@/lib/risk";
 
@@ -122,12 +122,13 @@ export default function AIRiskFormModal({
       <form onSubmit={submit} className="space-y-4">
         <div className="grid grid-cols-2 gap-4">
           <div>
-            <label className="label">Title</label>
-            <input className="input w-full" value={form.title} onChange={(e) => setForm({ ...form, title: e.target.value })} required />
+            <label className="label" htmlFor="ai-title">Title</label>
+            <input id="ai-title" className="input w-full" value={form.title} onChange={(e) => setForm({ ...form, title: e.target.value })} required />
           </div>
           <div>
-            <label className="label">AI System</label>
+            <label className="label" htmlFor="ai-system-name">AI System</label>
             <input
+              id="ai-system-name"
               className="input w-full"
               value={form.ai_system_name ?? ""}
               placeholder="e.g. Customer support chatbot"
@@ -137,12 +138,12 @@ export default function AIRiskFormModal({
         </div>
 
         <div>
-          <label className="label">Description</label>
-          <textarea className="input w-full" rows={2} value={form.description ?? ""} onChange={(e) => setForm({ ...form, description: e.target.value })} />
+          <label className="label" htmlFor="ai-description">Description</label>
+          <textarea id="ai-description" className="input w-full" rows={2} value={form.description ?? ""} onChange={(e) => setForm({ ...form, description: e.target.value })} />
         </div>
 
         <div>
-          <label className="label">Taxonomy</label>
+          <span className="label">Taxonomy</span>
           <div className="grid grid-cols-2 gap-2">
             <button
               type="button"
@@ -174,16 +175,16 @@ export default function AIRiskFormModal({
         {form.taxonomy === "ai_rmf" ? (
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="label">AI RMF Function</label>
-              <select className="input w-full" value={form.function_code ?? ""} onChange={(e) => setForm({ ...form, function_code: e.target.value, subcategory_id: null })}>
+              <label className="label" htmlFor="ai-function-code">AI RMF Function</label>
+              <select id="ai-function-code" className="input w-full" value={form.function_code ?? ""} onChange={(e) => setForm({ ...form, function_code: e.target.value, subcategory_id: null })}>
                 {framework.map((f) => (
                   <option key={f.code} value={f.code}>{f.code}</option>
                 ))}
               </select>
             </div>
             <div>
-              <label className="label">Subcategory</label>
-              <select className="input w-full" value={form.subcategory_id ?? ""} onChange={(e) => setForm({ ...form, subcategory_id: e.target.value || null })}>
+              <label className="label" htmlFor="ai-subcategory">Subcategory</label>
+              <select id="ai-subcategory" className="input w-full" value={form.subcategory_id ?? ""} onChange={(e) => setForm({ ...form, subcategory_id: e.target.value || null })}>
                 <option value="">-- Select {form.function_code} subcategory --</option>
                 {subcategories.map((cat) => (
                   <optgroup key={cat.id} label={cat.code}>
@@ -199,8 +200,9 @@ export default function AIRiskFormModal({
           </div>
         ) : (
           <div>
-            <label className="label">OWASP GenAI LLM Category</label>
+            <label className="label" htmlFor="ai-owasp-category">OWASP GenAI LLM Category</label>
             <select
+              id="ai-owasp-category"
               className="input w-full"
               value={form.owasp_llm_id ?? ""}
               onChange={(e) => setForm({ ...form, owasp_llm_id: e.target.value || null })}
@@ -217,8 +219,8 @@ export default function AIRiskFormModal({
 
         <div className="grid grid-cols-2 gap-4">
           <div>
-            <label className="label">Trustworthy Characteristic</label>
-            <select className="input w-full" value={form.trust_characteristic ?? ""} onChange={(e) => setForm({ ...form, trust_characteristic: e.target.value })}>
+            <label className="label" htmlFor="ai-trust-characteristic">Trustworthy Characteristic</label>
+            <select id="ai-trust-characteristic" className="input w-full" value={form.trust_characteristic ?? ""} onChange={(e) => setForm({ ...form, trust_characteristic: e.target.value })}>
               <option value="">-- None --</option>
               {(taxonomy?.trust_characteristics ?? []).map((t) => (
                 <option key={t} value={t}>{t}</option>
@@ -226,8 +228,8 @@ export default function AIRiskFormModal({
             </select>
           </div>
           <div>
-            <label className="label">GenAI Risk Category (optional)</label>
-            <select className="input w-full" value={form.gai_risk_category ?? ""} onChange={(e) => setForm({ ...form, gai_risk_category: e.target.value })}>
+            <label className="label" htmlFor="ai-gai-risk-category">GenAI Risk Category (optional)</label>
+            <select id="ai-gai-risk-category" className="input w-full" value={form.gai_risk_category ?? ""} onChange={(e) => setForm({ ...form, gai_risk_category: e.target.value })}>
               <option value="">-- Not generative AI --</option>
               {(taxonomy?.gai_risk_categories ?? []).map((g) => (
                 <option key={g} value={g}>{g}</option>
@@ -238,16 +240,16 @@ export default function AIRiskFormModal({
 
         <div className="grid grid-cols-2 gap-4">
           <div>
-            <label className="label">Status</label>
-            <select className="input w-full" value={form.status} onChange={(e) => setForm({ ...form, status: e.target.value as AIRiskPayload["status"] })}>
+            <label className="label" htmlFor="ai-status">Status</label>
+            <select id="ai-status" className="input w-full" value={form.status} onChange={(e) => setForm({ ...form, status: e.target.value as AIRiskPayload["status"] })}>
               {STATUS_OPTIONS.map((s) => (
                 <option key={s} value={s}>{s}</option>
               ))}
             </select>
           </div>
           <div>
-            <label className="label">Risk Response</label>
-            <select className="input w-full" value={form.risk_response ?? ""} onChange={(e) => setForm({ ...form, risk_response: e.target.value })}>
+            <label className="label" htmlFor="ai-risk-response">Risk Response</label>
+            <select id="ai-risk-response" className="input w-full" value={form.risk_response ?? ""} onChange={(e) => setForm({ ...form, risk_response: e.target.value })}>
               {(taxonomy?.risk_responses ?? ["Mitigate", "Transfer", "Avoid", "Accept"]).map((r) => (
                 <option key={r} value={r}>{r}</option>
               ))}
@@ -257,16 +259,16 @@ export default function AIRiskFormModal({
 
         <div className="grid grid-cols-2 gap-4">
           <div>
-            <label className="label">Likelihood</label>
-            <select className="input w-full" value={form.likelihood} onChange={(e) => setForm({ ...form, likelihood: Number(e.target.value) })}>
+            <label className="label" htmlFor="ai-likelihood">Likelihood</label>
+            <select id="ai-likelihood" className="input w-full" value={form.likelihood} onChange={(e) => setForm({ ...form, likelihood: Number(e.target.value) })}>
               {[1, 2, 3, 4, 5].map((n) => (
                 <option key={n} value={n}>{n} - {LIKELIHOOD_LABELS[n]}</option>
               ))}
             </select>
           </div>
           <div>
-            <label className="label">Impact</label>
-            <select className="input w-full" value={form.impact} onChange={(e) => setForm({ ...form, impact: Number(e.target.value) })}>
+            <label className="label" htmlFor="ai-impact">Impact</label>
+            <select id="ai-impact" className="input w-full" value={form.impact} onChange={(e) => setForm({ ...form, impact: Number(e.target.value) })}>
               {[1, 2, 3, 4, 5].map((n) => (
                 <option key={n} value={n}>{n} - {IMPACT_LABELS[n]}</option>
               ))}
@@ -283,22 +285,22 @@ export default function AIRiskFormModal({
 
         <div className="grid grid-cols-3 gap-4">
           <div>
-            <label className="label">Owner</label>
-            <input className="input w-full" value={form.owner ?? ""} onChange={(e) => setForm({ ...form, owner: e.target.value })} />
+            <label className="label" htmlFor="ai-owner">Owner</label>
+            <input id="ai-owner" className="input w-full" value={form.owner ?? ""} onChange={(e) => setForm({ ...form, owner: e.target.value })} />
           </div>
           <div>
-            <label className="label">Review Date</label>
-            <input type="date" className="input w-full" value={form.review_date ?? ""} onChange={(e) => setForm({ ...form, review_date: e.target.value })} />
+            <label className="label" htmlFor="ai-review-date">Review Date</label>
+            <input id="ai-review-date" type="date" className="input w-full" value={form.review_date ?? ""} onChange={(e) => setForm({ ...form, review_date: e.target.value })} />
           </div>
           <div>
-            <label className="label">Residual Risk</label>
-            <input type="number" min="0" max="25" className="input w-full" value={form.residual_risk ?? ""} onChange={(e) => setForm({ ...form, residual_risk: e.target.value ? Number(e.target.value) : null })} />
+            <label className="label" htmlFor="ai-residual-risk">Residual Risk</label>
+            <input id="ai-residual-risk" type="number" min="0" max="25" className="input w-full" value={form.residual_risk ?? ""} onChange={(e) => setForm({ ...form, residual_risk: e.target.value ? Number(e.target.value) : null })} />
           </div>
         </div>
 
         <div>
-          <label className="label">Notes</label>
-          <textarea className="input w-full" rows={2} value={form.notes ?? ""} onChange={(e) => setForm({ ...form, notes: e.target.value })} />
+          <label className="label" htmlFor="ai-notes">Notes</label>
+          <textarea id="ai-notes" className="input w-full" rows={2} value={form.notes ?? ""} onChange={(e) => setForm({ ...form, notes: e.target.value })} />
         </div>
 
         <div className="flex justify-end gap-2 pt-2">

@@ -9,6 +9,8 @@ from ..database import get_db
 
 router = APIRouter(prefix="/api/risks", tags=["risks"])
 
+RISK_NOT_FOUND = "Risk not found"
+
 
 @router.get("", response_model=list[schemas.RiskOut])
 def list_risks(
@@ -53,7 +55,7 @@ def get_risk(risk_id, db: Session = Depends(get_db)):
         db.query(models.Risk).options(joinedload(models.Risk.control)).filter(models.Risk.id == risk_id).first()
     )
     if not risk:
-        raise HTTPException(status_code=404, detail="Risk not found")
+        raise HTTPException(status_code=404, detail=RISK_NOT_FOUND)
     return risk
 
 
@@ -61,7 +63,7 @@ def get_risk(risk_id, db: Session = Depends(get_db)):
 def update_risk(risk_id, payload: schemas.RiskUpdate, db: Session = Depends(get_db)):
     risk = db.query(models.Risk).filter(models.Risk.id == risk_id).first()
     if not risk:
-        raise HTTPException(status_code=404, detail="Risk not found")
+        raise HTTPException(status_code=404, detail=RISK_NOT_FOUND)
     return crud.update_risk(db, risk, payload)
 
 
@@ -69,6 +71,6 @@ def update_risk(risk_id, payload: schemas.RiskUpdate, db: Session = Depends(get_
 def delete_risk(risk_id, db: Session = Depends(get_db)):
     risk = db.query(models.Risk).filter(models.Risk.id == risk_id).first()
     if not risk:
-        raise HTTPException(status_code=404, detail="Risk not found")
+        raise HTTPException(status_code=404, detail=RISK_NOT_FOUND)
     db.delete(risk)
     db.commit()
