@@ -1,0 +1,10 @@
+# util-linux/libuuid CVEs in the nginx:1.31-alpine base image: mount(8)/nsenter
+# privilege-escalation issues in code paths nginx never invokes at runtime.
+# No upstream Alpine fix is available yet; revisit when one ships.
+CVE-2026-53612
+CVE-2026-53613
+CVE-2026-53614
+CVE-2026-76642
+CVE-2026-78408
+CVE-2026-78409
+CVE-2026-78410

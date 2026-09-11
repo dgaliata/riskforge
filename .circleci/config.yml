@@ -39,14 +39,18 @@ jobs:
       - run:
           name: Scan backend image
           command: |
-            docker run --rm -v /var/run/docker.sock:/var/run/docker.sock \
+            docker run --rm \
+              -v /var/run/docker.sock:/var/run/docker.sock \
+              -v "$(pwd)":/work -w /work \
               aquasec/trivy:0.56.2 image \
               --severity HIGH,CRITICAL --ignore-unfixed --exit-code 1 \
               riskforge-backend:ci
       - run:
           name: Scan frontend image
           command: |
-            docker run --rm -v /var/run/docker.sock:/var/run/docker.sock \
+            docker run --rm \
+              -v /var/run/docker.sock:/var/run/docker.sock \
+              -v "$(pwd)":/work -w /work \
               aquasec/trivy:0.56.2 image \
               --severity HIGH,CRITICAL --ignore-unfixed --exit-code 1 \
               riskforge-frontend:ci
